@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+.DS_Store
+
+# .env is committed in this repo (local dev defaults only).
+.env.local
+.env.*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.log
+*.tsbuildinfo

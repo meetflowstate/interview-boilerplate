@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: interview-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-54329}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-app}"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  redis:
+    image: redis:7-alpine
+    container_name: interview-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-63790}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62
+    container_name: interview-jaeger
+    restart: unless-stopped
+    ports:
+      - "${JAEGER_UI_PORT:-16686}:16686"   # Jaeger UI
+      - "${OTLP_HTTP_PORT:-4318}:4318"     # OTLP HTTP (the app sends here)
+      - "${OTLP_GRPC_PORT:-4317}:4317"     # OTLP gRPC
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+
+volumes:
+  postgres_data:
