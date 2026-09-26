@@ -35,6 +35,10 @@ updates:
         applies-to: version-updates
         patterns: ["*"]
         update-types: ["minor", "patch"]
+      docker_compose-security:
+        applies-to: security-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -47,5 +51,9 @@ updates:
     groups:
       github_actions-minor-and-patch:
         applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      github_actions-security:
+        applies-to: security-updates
         patterns: ["*"]
         update-types: ["minor", "patch"]
