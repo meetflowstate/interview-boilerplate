@@ -1,59 +1,33 @@
-# Weekly dependency updates. Minor and patch updates are grouped into one PR
-# per ecosystem; major updates arrive one per PR and are never auto-merged
-# (see .github/workflows/dependabot-auto-merge.yml).
+# One Dependabot PR per week for the whole repo: every ecosystem and every
+# update (major, minor and patch) lands in a single grouped PR on Monday
+# morning. The auto-merge workflow merges it when CI passes and nothing moves
+# a major version; otherwise it's labelled needs-human-review.
 version: 2
+
+multi-ecosystem-groups:
+  weekly:
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/London"
+
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/London"
+    patterns: ["*"]
+    multi-ecosystem-group: "weekly"
     labels:
       - "dependencies"
-    groups:
-      npm-minor-and-patch:
-        applies-to: version-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-      npm-security:
-        applies-to: security-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
   - package-ecosystem: "docker-compose"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/London"
+    patterns: ["*"]
+    multi-ecosystem-group: "weekly"
     labels:
       - "dependencies"
-    groups:
-      docker_compose-minor-and-patch:
-        applies-to: version-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-      docker_compose-security:
-        applies-to: security-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/London"
+    patterns: ["*"]
+    multi-ecosystem-group: "weekly"
     labels:
       - "dependencies"
-    groups:
-      github_actions-minor-and-patch:
-        applies-to: version-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-      github_actions-security:
-        applies-to: security-updates
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
