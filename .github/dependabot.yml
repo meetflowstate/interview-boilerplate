@@ -1,7 +1,10 @@
-# One Dependabot PR per week for the whole repo: every ecosystem and every
-# update (major, minor and patch) lands in a single grouped PR on Monday
-# morning. The auto-merge workflow merges it when CI passes and nothing moves
-# a major version; otherwise it's labelled needs-human-review.
+# One Dependabot version-update PR per week for the whole repo: every
+# ecosystem and every update type (major, minor and patch) lands in a single
+# grouped PR on Monday morning. The auto-merge workflow merges it unless a
+# dependency moves a major version, in which case it's labelled
+# needs-human-review. Multi-ecosystem groups cover version updates only: if
+# Dependabot security updates are switched on in the repo settings, those
+# still arrive as their own PRs.
 version: 2
 
 multi-ecosystem-groups:
